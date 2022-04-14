@@ -1,11 +1,4 @@
 :root {
-    --level-one: translateZ(3rem);
-    --level-two: translateZ(6rem);
-    --level-three: translateZ(9rem);
-
-    --fw-normal: 400;
-    --fw-bold: 700;
-
     --clr: #a4b4ce;
     --border-color: black;
     --card-color: white;
@@ -19,8 +12,7 @@
 
 body {
     background-color: antiquewhite;
-    font-family: "Oswald", sans-serif;
-    /*background: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f22394df-9a75-4771-8225-ea50370155c7/d4mh7q5-25a47434-05e7-413b-9934-7c555ab034e8.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2YyMjM5NGRmLTlhNzUtNDc3MS04MjI1LWVhNTAzNzAxNTVjN1wvZDRtaDdxNS0yNWE0NzQzNC0wNWU3LTQxM2ItOTkzNC03YzU1NWFiMDM0ZTguanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.o5MBcxD2GF6ZtvOpSmq2UBuRQ7wTjHLNgYN2f8AOyUU") ;*/
+    font-family: 'Ubuntu', sans-serif;    /*background: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f22394df-9a75-4771-8225-ea50370155c7/d4mh7q5-25a47434-05e7-413b-9934-7c555ab034e8.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2YyMjM5NGRmLTlhNzUtNDc3MS04MjI1LWVhNTAzNzAxNTVjN1wvZDRtaDdxNS0yNWE0NzQzNC0wNWU3LTQxM2ItOTkzNC03YzU1NWFiMDM0ZTguanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.o5MBcxD2GF6ZtvOpSmq2UBuRQ7wTjHLNgYN2f8AOyUU") ;*/
     /*background-size: auto;*/
 }
 
@@ -68,7 +60,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-family: sans-serif;
     background-color: var(--card-color);
 }
 
@@ -102,20 +93,6 @@ body {
         font-family: sans-serif;
     }
 }
-
-
-@import url("https://fonts.googleapis.com/css?family=Oswald:400,700");
-:root {
-    --level-one: translateZ(3rem);
-    --level-two: translateZ(6rem);
-    --level-three: translateZ(9rem);
-    --fw-normal: 400;
-    --fw-bold: 700;
-    --clr: #a4b4ce;
-}
-
-
-
 
 .card {
     width: 400px;
@@ -175,27 +152,6 @@ body {
     backface-visibility: hidden;
 }
 
-.card__front {
-    background-color: var(--clr);
-    background-image: url(../img/CNV000035.JPG);
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: overlay;
-    color: #333;
-}
-
-.card__front::before {
-    content: "";
-    position: absolute;
-    --spacer: 1em;
-    top: var(--spacer);
-    bottom: var(--spacer);
-    left: var(--spacer);
-    right: var(--spacer);
-    border: 3px solid currentColor;
-    transform: var(--level-one);
-}
-
 
 @media (max-width: 400px) {
     .sprite {
@@ -246,4 +202,51 @@ body {
 .center-hor {
     display: flex;
     justify-content: center;
+}
+
+.search-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+
+.close-button {
+    width: 100px;
+    height: 30px;
+}
+
+.loader-position {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.btn {
+    background-color: var(--card-color);
+    color: var(--border-color);
+    padding: 7px;
+    border-radius: 4px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.input-text {
+    padding: 7px;
+    border-radius: 4px;
+    font-family: 'Ubuntu', sans-serif;
 }

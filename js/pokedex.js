@@ -3,11 +3,10 @@ import {Pokemon} from "./pokemon";
 
 const Pokedex = () => {
     const [pokemonList, setPokemnList] = useState([]);
-    const [next, setNext] = useState(5)
-
+    const [next, setNext] = useState(20)
 
     useEffect(() => {
-        for (let i = next - 4; i <= next; i++) {
+        for (let i = next - 19; i <= next; i++) {
             if (localStorage.getItem(i) === null) {
                 fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
                     .then(response => response.json())
@@ -18,6 +17,7 @@ const Pokedex = () => {
                             name: data.name,
                             id: data.id,
                             weight: data.weight,
+                            height: data.height,
                             types: data.types,
                             spriteFront: data.sprites.front_default,
                             spriteBack: data.sprites.back_default,
@@ -34,7 +34,7 @@ const Pokedex = () => {
     }, [next])
 
     const handleMore = () => {
-        setNext(prevState => prevState + 5)
+        setNext(prevState => prevState + 20)
     }
 
     console.log(pokemonList)
@@ -59,6 +59,7 @@ const Pokedex = () => {
                         name: data.name,
                         id: data.id,
                         weight: data.weight,
+                        height: data.height,
                         types: data.types,
                         spriteFront: data.sprites.front_default,
                         spriteBack: data.sprites.back_default,
@@ -67,24 +68,64 @@ const Pokedex = () => {
                 })
                 .catch(err => {
                     console.warn(err)
-                    alert("There is no Pokemon with this name in database. Please check spelling and try again")
+                    alert("There is no Pokemon with this name in database. Please check your spelling and try again.")
                 })
+        } else {
+            localStorage.getItem(search) ?
+                (setSearchedPokemon(JSON.parse(localStorage.getItem(search)))) :
+                (fetch(`https://pokeapi.co/api/v2/pokemon/${search}`)
+                    .then(r => r.json())
+                    .then(data => {
+                        let pok = {
+                            name: data.name,
+                            id: data.id,
+                            weight: data.weight,
+                            height: data.height,
+                            types: data.types,
+                            spriteFront: data.sprites.front_default,
+                            spriteBack: data.sprites.back_default,
+                        }
+                        setSearchedPokemon(pok)
+                    })
+                    .catch(err => {
+                        console.warn(err)
+                        alert("There is no Pokemon with this ID in database. Please try again.")
+                    }))
         }
+        setSearch("")
     }
 
+     const handleCloseSearched = () => {
+        setSearchedPokemon(null)
+    }
+
+    pokemonList.sort(function(a, b) {
+        return a.id - b.id  ||  a.name.localeCompare(b.name);
+    });
+
+
+
     return !pokemonList.length ? (
-        <span>czekaj...</span>
+        <div className="loader-position">
+            <div className="loader"></div>
+        </div>
     ) : (
         <div className="container">
             <h1 className="center-text">PokeDex App</h1>
             <div className="menu">
-                <button onClick={handleDarkMode}>Toggle dark mode</button>
+                <button onClick={handleDarkMode} className="btn">Toggle dark mode</button>
                 {/*<button className="button" onClick={handleMore}>show me more</button>*/}
                 <form onSubmit={handleSearch}>
-                    <input type="text" value={search} onChange={e => setSearch(e.target.value)}/>
-                    <button type="submit">Search</button>
+                    <input type="text" placeholder="search by ID or name" className="input-text" value={search} onChange={e => setSearch(e.target.value)}/>
+                    <button type="submit" className="btn">Search</button>
                 </form>
             </div>
+            <div className="search-results">
+                {searchedPokemon !== null && <p>Here is a Pokemon you were searching for !!!</p>}
+                {searchedPokemon !== null && <Pokemon{...searchedPokemon}></Pokemon>}
+                {searchedPokemon !== null && <button className="close-button" onClick={handleCloseSearched}>CLOSE</button>}
+            </div>
+
             {/*<button onClick={handleMore}>show me more</button>*/}
             <ul className="listaPoke">
                 {
@@ -95,13 +136,8 @@ const Pokedex = () => {
                 }
             </ul>
             <div className="center-hor">
-                <button className="button" onClick={handleMore}>show me more</button>
+                <button className="button btn" onClick={handleMore}>show me more</button>
             </div>
-            {searchedPokemon !== null &&
-                (<div>
-                    {/*<div onClick={setSearchedPokemon(null)}>X</div>*/}
-                    <Pokemon {...searchedPokemon}></Pokemon>
-                </div>)}
         </div>
     )
 }
