@@ -166,7 +166,7 @@ body {
 
     .pokemon-card {
         width: calc(100% - 30px);
-        height: calc(25vh - 30px);
+        height: calc(25% - 30px);
         /*margin: 15px;*/
         display: flex;
         /*flex-direction: row-reverse;*/
