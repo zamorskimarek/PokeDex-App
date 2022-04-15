@@ -5,13 +5,19 @@ const Pokedex = () => {
     const [pokemonList, setPokemnList] = useState([]);
     const [next, setNext] = useState(20)
 
+    const [pokemonID, setPokemonID] useState([])
+    const checkPokemons = () => {
+        fetch()
+    }
+
+
     useEffect(() => {
         for (let i = next - 19; i <= next; i++) {
             if (localStorage.getItem(i) === null) {
                 fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data);
+                        // console.log(data);
                         // setPokemnList(prevState => [...prevState, data])
                         let pok = {
                             name: data.name,
@@ -29,7 +35,6 @@ const Pokedex = () => {
             } else {
                 setPokemnList(prevState => [...prevState, JSON.parse(localStorage.getItem(i))])
             }
-
         }
     }, [next])
 
@@ -37,7 +42,7 @@ const Pokedex = () => {
         setNext(prevState => prevState + 20)
     }
 
-    console.log(pokemonList)
+    // console.log(pokemonList)
 
     const handleDarkMode = () => {
         let element = document.body;
@@ -99,6 +104,10 @@ const Pokedex = () => {
         setSearchedPokemon(null)
     }
 
+    const handleClear = () => {
+        localStorage.clear()
+    }
+
     pokemonList.sort(function(a, b) {
         return a.id - b.id  ||  a.name.localeCompare(b.name);
     });
@@ -123,7 +132,7 @@ const Pokedex = () => {
             <div className="search-results">
                 {searchedPokemon !== null && <p>Here is a Pokemon you were searching for !!!</p>}
                 {searchedPokemon !== null && <Pokemon{...searchedPokemon}></Pokemon>}
-                {searchedPokemon !== null && <button className="close-button" onClick={handleCloseSearched}>CLOSE</button>}
+                {searchedPokemon !== null && <button className="btn" onClick={handleCloseSearched}>CLOSE</button>}
             </div>
 
             {/*<button onClick={handleMore}>show me more</button>*/}
@@ -137,6 +146,7 @@ const Pokedex = () => {
             </ul>
             <div className="center-hor">
                 <button className="button btn" onClick={handleMore}>show me more</button>
+                <button className="button btn" onClick={handleClear}>clear localStorage</button>
             </div>
         </div>
     )
