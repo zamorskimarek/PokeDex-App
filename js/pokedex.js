@@ -5,12 +5,6 @@ const Pokedex = () => {
     const [pokemonList, setPokemnList] = useState([]);
     const [next, setNext] = useState(20)
 
-    const [pokemonID, setPokemonID] useState([])
-    const checkPokemons = () => {
-        fetch()
-    }
-
-
     useEffect(() => {
         for (let i = next - 19; i <= next; i++) {
             if (localStorage.getItem(i) === null) {
