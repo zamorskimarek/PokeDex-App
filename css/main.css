@@ -80,6 +80,12 @@ body {
     margin-bottom: 50px;
 }
 
+@media (min-width: 1440px) {
+    .pokemon-card {
+        width: calc(12.5% - 30px);
+
+    }
+}
 
 @media (max-width: 930px) {
     .sprite {
@@ -92,7 +98,6 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
-        font-family: sans-serif;
     }
 }
 
