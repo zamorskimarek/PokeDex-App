@@ -187,12 +187,10 @@ const Pokedex = () => {
         }
 
         for (let i = next - 20; i < next; i++) {
-            if (localStorage.getItem(i) === null) {
+            if (localStorage.getItem(JSON.parse(localStorage.getItem("arrayOfIds"))[i]) === null) {
                 fetch(`https://pokeapi.co/api/v2/pokemon/${JSON.parse(localStorage.getItem("arrayOfIds"))[i]}`)
                     .then(response => response.json())
                     .then(data => {
-                        // console.log(data);
-                        // setPokemnList(prevState => [...prevState, data])
                         let pok = {
                             name: data.name,
                             id: data.id,
@@ -244,6 +242,7 @@ const Pokedex = () => {
                         types: data.types,
                         spriteFront: data.sprites.front_default,
                         spriteBack: data.sprites.back_default,
+                        loaded: true,
                     }
                     setSearchedPokemon(pok)
                 })
@@ -265,6 +264,7 @@ const Pokedex = () => {
                             types: data.types,
                             spriteFront: data.sprites.front_default,
                             spriteBack: data.sprites.back_default,
+                            loaded: true,
                         }
                         setSearchedPokemon(pok)
                     })
@@ -310,8 +310,6 @@ const Pokedex = () => {
                 {searchedPokemon !== null && <Pokemon{...searchedPokemon}></Pokemon>}
                 {searchedPokemon !== null && <button className="btn" onClick={handleCloseSearched}>CLOSE</button>}
             </div>
-
-            {/*<button onClick={handleMore}>show me more</button>*/}
             <ul className="listaPoke">
                 {
                     pokemonList.map(pokemon => (
