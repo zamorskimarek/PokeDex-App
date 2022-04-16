@@ -147,7 +147,7 @@ body {
 }
 
 
-@media (max-width: 400px) {
+@media (max-width: 433px) {
     .sprite {
         width: 5.625rem;
 
@@ -192,6 +192,8 @@ body {
 
     .form-search {
         margin-left: 1rem;
+        display: flex;
+        flex-direction: column;
     }
 
 }
