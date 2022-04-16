@@ -72,18 +72,6 @@ body {
     text-transform: capitalize;
 }
 
-.types-display {
-    /*display: flex;*/
-    /*flex-wrap: wrap;*/
-}
-
-.button {
-    width: 30%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: var(--z-spacer);
-}
-
 @media (min-width: 1600px) {
     .pokemon-card {
         width: calc(12.5% - var(--spacer));
@@ -200,6 +188,10 @@ body {
     .types-display {
         display: flex;
         flex-wrap: wrap;
+    }
+
+    .form-search {
+        margin-left: 1rem;
     }
 
 }

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {Pokemon} from "./pokemon";
+import {Pokemon} from "./Pokemon";
 
 
-const Pokedex = () => {
+export const Pokedex = () => {
     const [pokemonList, setPokemnList] = useState([]);
     const [next, setNext] = useState(20)
     const [localLoaded, setLocaleLoaded] = useState(false)
@@ -145,7 +145,7 @@ const Pokedex = () => {
             <h1 className="center-text">PokeDex App</h1>
             <div className="menu">
                 <button onClick={handleDarkMode} className="btn">Toggle dark mode</button>
-                <form onSubmit={handleSearch}>
+                <form className="form-search" onSubmit={handleSearch}>
                     <input type="text" placeholder="search by ID or name" className="input-text" value={search} onChange={e => setSearch(e.target.value)}/>
                     <button type="submit" className="btn">Search</button>
                 </form>
@@ -171,5 +171,4 @@ const Pokedex = () => {
     )
 }
 
-export default Pokedex
 
